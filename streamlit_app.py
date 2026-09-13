@@ -192,13 +192,13 @@ def to_csv(tokens):
 # The page
 # --------------------------------------------------------------------------
 
-st.set_page_config(page_title="Judeo-Arabic / Hebrew word tagger", layout="wide")
+st.set_page_config(page_title="Trujaman: Judeo-Arabic & Hebrew word tagger", layout="wide")
 st.html(STYLE)
 
 st.title("Judeo-Arabic / Hebrew word tagger")
 st.write(
     "Paste a Hebrew-script text. Every word is labelled **HE** (Hebrew) or "
-    "**JA** (Judeo-Arabic) from its letter shapes and its two neighbours."
+    "**JA** (Judeo-Arabic)."
 )
 
 try:
@@ -213,16 +213,10 @@ except Exception as exc:  # noqa: BLE001
 text = st.text_area(
     "Text",
     height=240,
-    placeholder="ואלד'י אעלמה בה אן כתאב אלמולי אלשיך אלג'ליל וצל",
+    placeholder="פקאל לה אלפילסוף, ליס ענד אללה רצׄי ולא בגׄץׄ",
 )
 
 col_a, col_b = st.columns([3, 2])
-with col_a:
-    cross_lines = st.checkbox(
-        "Let a word see its neighbours across a line break", value=True
-    )
-with col_b:
-    name = st.text_input("Shelfmark, for the CSV filename", placeholder="T-S 13J13.21")
 
 if st.button("Tag the text", type="primary"):
     if not text.strip():
