@@ -192,10 +192,10 @@ def to_csv(tokens):
 # The page
 # --------------------------------------------------------------------------
 
-st.set_page_config(page_title="Trujaman: Judeo-Arabic & Hebrew word tagger", layout="wide")
+st.set_page_config(page_title="Trujaman", layout="wide")
 st.html(STYLE)
 
-st.title("Judeo-Arabic / Hebrew word tagger")
+st.title("Trujaman: Judeo-Arabic & Hebrew word tagger")
 st.write(
     "Paste a Hebrew-script text. Every word is labelled **HE** (Hebrew) or "
     "**JA** (Judeo-Arabic)."
@@ -215,14 +215,11 @@ text = st.text_area(
     height=240,
     placeholder="פקאל לה אלפילסוף, ליס ענד אללה רצׄי ולא בגׄץׄ",
 )
-
-col_a, col_b = st.columns([3, 2])
-
 if st.button("Tag the text", type="primary"):
     if not text.strip():
         st.warning("Paste some text above, then tag it.")
     else:
-        st.session_state["tokens"] = classify(tokenize(text), clf, cross_lines)
+        st.session_state["tokens"] = classify(tokenize(text), clf)
 
 tokens = st.session_state.get("tokens")
 
@@ -246,10 +243,9 @@ if tokens:
         )
         st.html(render(tokens))
 
-        safe = re.sub(r"[^\w.\- ]", "_", name).strip() or "tagged"
         st.download_button(
             "Download the tagged words as CSV",
             data=to_csv(tokens),
-            file_name=f"{safe}.csv",
+            file_name=f"tagged.csv",
             mime="text/csv",
         )
