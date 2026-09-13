@@ -195,7 +195,8 @@ def to_csv(tokens):
 st.set_page_config(page_title="Trujaman", layout="wide")
 st.html(STYLE)
 
-st.title("Trujaman: Judeo-Arabic & Hebrew word tagger")
+st.title("Trujaman")
+st.header("Judeo-Arabic & Hebrew word tagger")
 st.write(
     "Paste a Hebrew-script text. Every word is labelled **HE** (Hebrew) or "
     "**JA** (Judeo-Arabic)."
